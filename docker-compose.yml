@@ -1,4 +1,3 @@
-version: '3.9'
 services:
   redis:
     image: redis
@@ -7,21 +6,19 @@ services:
       - "6379:6379"
 
   worker:
-    context: .
     build: .
     container_name: celery_worker
-    # volumes:
-    #   - ./scrapy_app/output:/app/scrapy_app
+    volumes:
+      - ./scrapy_app/output:/tmp
     command: celery -A tasks worker --loglevel=info
     depends_on:
       - redis
 
   beat:
-    context: .
     build: .
     container_name: celery_beat
-    # volumes:
-    #   - ./scrapy_app/output:/app/scrapy_app
+    volumes:
+      - ./scrapy_app/output:/tmp
     command: celery -A celerybeat_schedule beat --loglevel=info
     depends_on:
       - redis

@@ -16,7 +16,7 @@ def run_spider():
     try:
         print("Starting Scrapy spider...")
         subprocess.run(
-            ["scrapy", "crawl", "example", "-o", "/tmp/output.json", "-t", "json"],
+            ["scrapy", "crawl", "example", "-o", "/tmp/output.json"],
             cwd="scrapy_app",
             check=True
         )
