@@ -1,3 +1,4 @@
 celery[redis]==5.3.6
 flower
 scrapy
+pymongo

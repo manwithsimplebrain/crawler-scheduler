@@ -58,9 +58,13 @@ DOWNLOAD_DELAY = 1
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    "scrapy_app.pipelines.ScrapyAppPipeline": 300,
-#}
+MONGO_URI = "mongodb://127.0.0.1:27017/"
+MONGO_DATABASE = "quotes_db"
+MONGO_COLLECTION = "quotes"
+
+ITEM_PIPELINES = {
+   "scrapy_app.pipelines.MongoDBPipeline": 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

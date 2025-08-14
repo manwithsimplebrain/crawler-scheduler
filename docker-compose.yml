@@ -5,21 +5,30 @@ services:
     ports:
       - "6379:6379"
 
+  db:
+    image: mongo
+    container_name: db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
   worker:
     build: .
     container_name: celery_worker
-    volumes:
-      - ./scrapy_app/output:/tmp
+    # volumes:
+    #   - ./scrapy_app/output:/tmp
     command: celery -A tasks worker --loglevel=info
     depends_on:
       - redis
+      - db
 
   beat:
     build: .
     container_name: celery_beat
-    volumes:
-      - ./scrapy_app/output:/tmp
-    command: celery -A celerybeat_schedule beat --loglevel=info
+    # volumes:
+    #   - ./scrapy_app/output:/tmp
+    command: celery -A scheduler beat --loglevel=info
     depends_on:
       - redis
 
@@ -31,3 +40,6 @@ services:
       - "5555:5555"
     depends_on:
       - redis
+
+volumes:
+  mongo_data:
