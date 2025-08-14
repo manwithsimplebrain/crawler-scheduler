@@ -58,7 +58,7 @@ DOWNLOAD_DELAY = 1
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-MONGO_URI = "mongodb://127.0.0.1:27017/"
+MONGO_URI = "mongodb://db:27017/"
 MONGO_DATABASE = "quotes_db"
 MONGO_COLLECTION = "quotes"
 
